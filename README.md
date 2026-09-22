@@ -12,7 +12,7 @@
 
 This is an interactive dashboard that takes **17,212 raw property listings** scraped from Buenos Aires' biggest real-estate portal and turns them into something a normal person can actually use: a clean map, a price-per-neighborhood comparison, and a tool that estimates what a property *should* cost based on its size, type, and location.
 
-**[Try the live app →](#)** *(add your link here after deploying — see the Deploy section below)*
+**[Try the live app →](#)** *https://property-data-analysis-price-prediction-dashboard.streamlit.app/*
 
 ---
 
