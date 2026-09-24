@@ -174,6 +174,6 @@ Listings sourced from the Properati Argentina open real estate dataset, covering
 ## Author
 
 **Ajibola Odeyemi**
-*Data Analytics & Visualization*
+*- Specialist in Quantitative & Qualitative Analytics*
 
 Built to demonstrate an end-to-end workflow: messy raw data in, a decision-ready tool out — the same shape of work involved in most real analytics roles, just on a public dataset instead of a company's internal one.
