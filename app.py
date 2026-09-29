@@ -7,9 +7,7 @@ import pydeck as pdk
 
 from src.data_processing import load_and_merge_data, clean_and_transform_data, train_price_model
 
-# ---------------------------------------------------------------------------
-# PAGE CONFIG
-# ---------------------------------------------------------------------------
+
 st.set_page_config(
     page_title="Buenos Aires, Mapped in Real Estate",
     page_icon="🏙️",
@@ -17,12 +15,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ---------------------------------------------------------------------------
-# PALETTE — warm plaster walls + jacaranda blue, the two colors that define
-# a Buenos Aires street: whitewashed/ochre facades and the purple jacaranda
-# trees that bloom over them every spring. Deliberately not the generic
-# cream+terracotta or dark-mode+neon combos.
-# ---------------------------------------------------------------------------
+
 PLASTER = "#F5F0E6"
 CARD = "#FFFFFF"
 INK = "#2B2621"
@@ -117,9 +110,7 @@ def kpi_card(label, value):
     )
 
 
-# ---------------------------------------------------------------------------
-# DATA
-# ---------------------------------------------------------------------------
+
 @st.cache_data
 def get_data():
     raw = load_and_merge_data("data/buenos-aires-real-estate-1.csv", "data/buenos-aires-real-estate-2.csv")
@@ -134,9 +125,7 @@ def get_model(df):
 df = get_data()
 model, feature_names, model_metrics = get_model(df)
 
-# ---------------------------------------------------------------------------
-# SIDEBAR FILTERS
-# ---------------------------------------------------------------------------
+
 st.sidebar.markdown("### Filter the listings")
 
 regions_present = [r for r in REGION_ORDER if r in df["region_label"].unique()]
@@ -167,9 +156,7 @@ filtered = filtered[filtered["price_aprox_usd"].between(*price_range)]
 
 st.sidebar.markdown(f"**{len(filtered):,}** listings match your filters")
 
-# ---------------------------------------------------------------------------
-# HERO
-# ---------------------------------------------------------------------------
+
 st.markdown('<div class="hero-title">Buenos Aires, mapped in real estate</div>', unsafe_allow_html=True)
 st.markdown(
     f'<div class="hero-sub">A tour of {len(df):,} property listings across Capital Federal and Greater '
@@ -183,9 +170,9 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(
     ["Overview", "Map", "Price patterns", "Price estimator", "Explore the data"]
 )
 
-# ---------------------------------------------------------------------------
+
 # TAB 1 — OVERVIEW
-# ---------------------------------------------------------------------------
+
 with tab1:
     c1, c2, c3, c4 = st.columns(4)
     with c1:
@@ -257,9 +244,9 @@ with tab1:
         "Prices are asking prices in USD as listed on Properati, not confirmed sale prices."
     )
 
-# ---------------------------------------------------------------------------
+
 # TAB 2 — MAP
-# ---------------------------------------------------------------------------
+
 with tab2:
     st.markdown("#### Where the filtered listings sit on the map")
     map_df = filtered.dropna(subset=["lat", "lon"]).copy()
@@ -297,9 +284,9 @@ with tab2:
     else:
         st.info("No listings with map coordinates match the current filters — try widening them.")
 
-# ---------------------------------------------------------------------------
+
 # TAB 3 — PRICE PATTERNS
-# ---------------------------------------------------------------------------
+
 with tab3:
     left, right = st.columns(2)
 
@@ -351,9 +338,9 @@ with tab3:
         )
         st.plotly_chart(base_layout(fig5, height=380), use_container_width=True)
 
-# ---------------------------------------------------------------------------
+
 # TAB 4 — PRICE ESTIMATOR
-# ---------------------------------------------------------------------------
+
 with tab4:
     st.markdown("#### Get a fair-price estimate")
     st.caption(
@@ -390,9 +377,9 @@ with tab4:
             unsafe_allow_html=True,
         )
 
-# ---------------------------------------------------------------------------
+
 # TAB 5 — EXPLORE THE DATA
-# ---------------------------------------------------------------------------
+
 with tab5:
     st.markdown(f"#### {len(filtered):,} filtered listings")
     display_cols = [
